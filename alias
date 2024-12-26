@@ -1,0 +1,49 @@
+alias ..='cd..'
+alias agg="sudo pacman -Syu"
+alias aggiorna="cowsay 'YES, MY MASTER!'; sudo pacman -Syu"
+alias aggiorna-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias all-frames='ffmpeg -i $1 thumb%04d.png -hide_banner'
+alias avvia-docker='systemctl --user start docker-desktop'
+alias bye='systemctl poweroff'
+alias cale='cal -3'
+alias carica-batteria='echo BAT0: "$(cat /sys/class/power_supply/BAT0/capacity)"%, BAT1: "$(cat /sys/class/power_supply/BAT1/capacity)"%'
+alias configura-alias='nano ${HOME}/.oh-my-bash/custom/aliases/shell.aliases.sh'
+alias configura-neofetch='nano ${HOME}/.config/neofetch/config.conf'
+alias controlla-processi-e-porte='netstat -tulpn'
+alias dmesgg="dmesg --human --follow-new --decode --kernel"
+alias docker-compose="docker compose"
+alias ferma-docker='systemctl --user stop docker-desktop'
+alias fuck="sudo !!" 
+alias ipv4="ip addr show | grep 'inet ' | grep -v '127.0.0.1' | cut -d' ' -f6 | cut -d/ -f1"
+alias ipv6="ip addr show | grep 'inet6 ' | cut -d ' ' -f6 | sed -n '2p'"
+alias layout-tastiera='setxkbmap -layout it -variant us'
+alias lse='eza --group-directories-first --icons=always'
+alias log-boot-errors='journalctl -b -p err'
+alias lowercase-folder='for FOLDER in *; do [ -d "$FOLDER" ] && LOWERCASE=$(echo "$FOLDER" | tr '[:upper:]' '[:lower:]') && [ "$FOLDER" != "$LOWERCASE" ] && mv "$FOLDER" "${LOWERCASE}_tmp" && mv "${LOWERCASE}_tmp" "$LOWERCASE"; done
+';
+alias public-ip='curl ifconfig.me && echo ""'
+alias meteo-catania='curl wttr.in/Catania | head -n -1'
+alias mio-ls='ls -la -N'
+alias kal='kate /home/lcst/.oh-my-bash/custom/aliases/shell.aliases.sh'
+alias oll='ollama run deepseek-coder-v2'
+alias reload="source ~/.bashrc"
+alias spegni='systemctl poweroff'
+alias sal='source /home/lcst/.oh-my-bash/custom/aliases/shell.aliases.sh'
+alias riavvia='systemctl reboot'
+alias uccidi-porta='function _killport(){ lsof -i :$1 | awk '\''NR!=1 {print $2}'\'' | xargs kill -9; }; _killport'
+alias uccidi-processo='kill -9'
+alias yas='yay -S'
+alias yar='sudo pacman -R'
+# FUNZIONI
+alias mp3-a-ogg="function _convert() { \
+  bitrate=\$(ffmpeg -i \"\$1\" 2>&1 | grep -oP '(?<=bitrate: )[0-9]+'); \
+  if [ \$bitrate -ge 192 ]; then \
+    ffmpeg -i \"\$1\" -vn -c:a libvorbis -b:a 192k \"\${1%.*}.ogg\"; \
+  else \
+    ffmpeg -i \"\$1\" -vn -c:a libvorbis -b:a \${bitrate}k \"\${1%.*}.ogg\"; \
+  fi; \
+}; _convert"
+function mkcd() {
+	mkdir $1
+	cd $1
+}
